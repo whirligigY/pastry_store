@@ -1,7 +1,10 @@
 const { Type } = require('../models/model');
 const ApiError = require('../errors/apiError');
 class TypeController {
-  async getAll(req, res, next) {}
+  async getAll(req, res, next) {
+    const types = await Type.findAll();
+    res.json(types);
+  }
 
   async create(req, res, next) {
     const { name } = req.body;
@@ -18,7 +21,6 @@ class TypeController {
     }
     return res.status(200).json(type);
   }
-  async remove(req, res, next) {}
 }
 
 module.exports = new TypeController();
