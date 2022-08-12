@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
-const { User } = require('../models/model');
+const { User, Basket } = require('../models/model');
 const ApiError = require('../errors/apiError');
 
 const generateToken = (id, email, role) => {
@@ -29,8 +29,12 @@ class UserController {
         );
       }
       const isEmailUsed = await User.findOne({ where: { email } });
+      if (isEmailUsed) {
+        return next(ApiError.badRequest('Such email is already exists'));
+      }
       const hashPassword = await bcrypt.hash(password, 5);
       const user = await User.create({ email, password: hashPassword, role });
+      const basket = await Basket.create({ userId: user.id });
       const token = generateToken(user.id, user.email, user.role);
       return res.status(200).json({ token });
     } catch (e) {
@@ -41,10 +45,11 @@ class UserController {
   async login(req, res, next) {
     try {
       const { email, password, role } = req.body;
+
       if (!email || !password) {
         return next(ApiError.badRequest('Empty login or password'));
       }
-      const user = await User.findOne({ where: email });
+      const user = await User.findOne({ where: { email } });
       if (!user) {
         return next(ApiError.badRequest('User not found'));
       }
@@ -62,7 +67,7 @@ class UserController {
     try {
       const { id, email, role } = req.user;
       const token = generateToken({ id, email, role });
-      res.status(200).json(token);
+      return res.json(token);
     } catch (e) {
       next(e);
     }
