@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx';
+
 export default class DeviceStore {
   constructor() {
     this._devices = [
@@ -6,7 +8,7 @@ export default class DeviceStore {
         name: 'ite-53',
         price: 250000,
         raiting: 0,
-        img: '797a1cc6-e205-40db-a059-616f4e2a3534.jpg',
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
         typeId: 1,
         brandId: 3,
       },
@@ -15,7 +17,7 @@ export default class DeviceStore {
         name: 'ite-55',
         price: 250000,
         raiting: 0,
-        img: 'bcc867f7-7eaf-49cf-ae70-cb8c5ba25d41.jpg',
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
         typeId: 1,
         brandId: 3,
       },
@@ -24,11 +26,48 @@ export default class DeviceStore {
         name: 'gtr-5558',
         price: 45500,
         raiting: 0,
-        img: '4587ec76-1ba5-461e-9956-f842981ab438.jpg',
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
+        typeId: 2,
+        brandId: 4,
+      },
+      {
+        id: 4,
+        name: 'gtr-5558',
+        price: 45500,
+        raiting: 0,
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
+        typeId: 2,
+        brandId: 4,
+      },
+      {
+        id: 5,
+        name: 'gtr-5558',
+        price: 45500,
+        raiting: 0,
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
+        typeId: 2,
+        brandId: 4,
+      },
+      {
+        id: 6,
+        name: 'gtr-5558',
+        price: 45500,
+        raiting: 0,
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
+        typeId: 2,
+        brandId: 4,
+      },
+      {
+        id: 7,
+        name: 'gtr-5558',
+        price: 45500,
+        raiting: 0,
+        img: 'https://cdn5.vectorstock.com/i/1000x1000/99/64/business-card-template-for-dairy-shop-vector-19279964.jpg',
         typeId: 2,
         brandId: 4,
       },
     ];
+    makeAutoObservable(this);
   }
 
   get devices() {
