@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx';
+
 export default class TypeStore {
   constructor() {
     this._types = [
@@ -14,6 +16,8 @@ export default class TypeStore {
         name: 'Kiten',
       },
     ];
+    this._selected = 1;
+    makeAutoObservable(this);
   }
 
   setTypes(types) {
@@ -22,5 +26,12 @@ export default class TypeStore {
 
   get types() {
     return this._types;
+  }
+  setSelected(id) {
+    this._selected = id;
+  }
+
+  get selected() {
+    return this._selected;
   }
 }
