@@ -1,13 +1,12 @@
 import { useContext } from 'react';
-import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Nav, Button } from 'react-bootstrap';
-import { Navbar } from 'react-bootstrap';
+import { Container, Nav, Button, Navbar } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../index';
-import { SHOP_ROUTE } from '../utils/consts';
+import { SHOP_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const { user } = useContext(Context);
   return (
     <Navbar bg="primary" variant="light">
@@ -21,10 +20,21 @@ const NavBar = () => {
 
         {user.isAuth ? (
           <Nav className="justify-content-end">
-            <Button variant="light" style={{ marginRight: '10px' }}>
+            <Button
+              variant="light"
+              style={{ marginRight: '10px' }}
+              onClick={() => navigate(ADMIN_ROUTE)}
+            >
               Admin panel
             </Button>
-            <Button onClick={() => user.setIsAuth(false)}>Exit</Button>
+            <Button
+              onClick={() => {
+                user.setIsAuth(false);
+                navigate(LOGIN_ROUTE);
+              }}
+            >
+              Exit
+            </Button>
           </Nav>
         ) : (
           <Nav className="justify-content-end">
